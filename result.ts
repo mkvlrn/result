@@ -7,7 +7,6 @@
  * Result type to represent the outcome of an operation.
  * It can either be a success with a value or an error with an error message.
  * This is a generic type that can be used with any type of value and error.
- * It is useful for handling operations that can fail, such as network requests or file operations.
  */
 export type Result<T, E = Error> =
   | { readonly ok: true; readonly value: T }
