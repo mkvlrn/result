@@ -44,7 +44,3 @@ const validationError = Result.error<ValidationError>({
 - Simple API
 - Full TypeScript support
 - Tiny bundle size
-
-## License
-
-MIT
