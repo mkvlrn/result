@@ -5,17 +5,14 @@ A lightweight, zero-dependency TypeScript utility for type-safe error handling u
 ## Installation
 
 ```bash
-# Using npm
-npm install mkvlrn/result
-
 # Using yarn
-yarn add mkvlrn/result
+yarn add @mkvlrn/result
 ```
 
 ## Usage
 
 ```ts
-import { Result } from '@mkvlrn/result';
+import { Result } from "@mkvlrn/result";
 
 // Success case
 const success = Result.success(42);
@@ -24,16 +21,16 @@ if (success.ok) {
 }
 
 // Error case
-const error = Result.error(new Error('Something went wrong'));
+const error = Result.error(new Error("Something went wrong"));
 if (!error.ok) {
   console.log(error.error.message); // "Something went wrong"
 }
 
 // Custom error type
 type ValidationError = { field: string; message: string };
-const validationError = Result.error<ValidationError>({ 
-  field: 'email', 
-  message: 'Invalid email format' 
+const validationError = Result.error<ValidationError>({
+  field: "email",
+  message: "Invalid email format",
 });
 ```
 
