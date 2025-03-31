@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "license": "MIT",
   "type": "module",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
   "exports": {
     "types": "./build/index.d.ts",
     "default": "./build/index.js"
