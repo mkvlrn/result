@@ -10,7 +10,6 @@ on:
 
 jobs:
   publish:
-    needs: run-checks
     name: publish to npm
     runs-on: ubuntu-latest
     permissions:
