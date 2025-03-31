@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    // build
+    "outDir": "./build",
+    "rootDir": "./src",
+    "declaration": true,
+
+    // no funny business
+    "erasableSyntaxOnly": true,
+    "verbatimModuleSyntax": true,
+
+    // hella strict
+    // https://whatislove.dev/articles/the-strictest-typescript-config/
+    "allowJs": false,
+    "exactOptionalPropertyTypes": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    "strict": true,
+    "strictNullChecks": true,
+
+    // esm, the node way
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "lib": ["ESNext"],
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
+    "target": "esnext"
+  },
+
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "build"]
+}

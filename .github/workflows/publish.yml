@@ -1,0 +1,36 @@
+name: publish
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  publish:
+    needs: run-checks
+    name: publish to npm
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 23
+      - name: install
+        run: yarn install
+      - name: build
+        run: yarn build
+      - name: package
+        run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

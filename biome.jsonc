@@ -1,0 +1,41 @@
+{
+  "$schema": "node_modules/@biomejs/biome/configuration_schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "ignoreUnknown": true,
+    "includes": ["**/*", "!build/**", "!node_modules/**", "!dist/**", "!coverage/**"]
+  },
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": true,
+    "useEditorconfig": true,
+    "lineWidth": 100 // this should be max_line_length from .editorconfig but biome is dumb
+  },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "domains": {
+      "test": "all"
+    },
+    "rules": {
+      "a11y": "on",
+      "complexity": "on",
+      "correctness": "on",
+      "nursery": "on",
+      "performance": "on",
+      "security": "on",
+      "style": "on",
+      "suspicious": "on"
+    }
+  }
+}
