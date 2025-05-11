@@ -1,32 +1,36 @@
 {
-  "$schema": "node_modules/@biomejs/biome/configuration_schema.json",
   "vcs": {
-    "enabled": true,
     "clientKind": "git",
+    "enabled": true,
     "useIgnoreFile": true
   },
   "files": {
     "ignoreUnknown": true,
     "includes": ["**/*", "!build/**", "!node_modules/**", "!dist/**", "!coverage/**"]
   },
-  "formatter": {
-    "enabled": true,
-    "formatWithErrors": true,
-    "useEditorconfig": true,
-    "lineWidth": 100 // this should be max_line_length from .editorconfig but biome is dumb
-  },
   "assist": {
     "actions": {
       "source": {
-        "organizeImports": "on"
+        "organizeImports": "on",
+        "useSortedAttributes": "on",
+        "useSortedKeys": "off",
+        "useSortedProperties": "on"
       }
     }
   },
-  "linter": {
+  "formatter": {
     "enabled": true,
+    "formatWithErrors": true,
+    "lineEnding": "lf",
+    "lineWidth": 100,
+    "indentStyle": "space",
+    "indentWidth": 2
+  },
+  "linter": {
     "domains": {
       "test": "all"
     },
+    "enabled": true,
     "rules": {
       "a11y": "on",
       "complexity": "on",
@@ -37,5 +41,35 @@
       "style": "on",
       "suspicious": "on"
     }
-  }
+  },
+  "overrides": [
+    {
+      // TODO: check later
+      // not working properly, flags stuff from node_modules as unresolved
+      "includes": ["**/*"],
+      "linter": {
+        "rules": {
+          "nursery": {
+            "noUnresolvedImports": "off"
+          }
+        }
+      }
+    },
+
+    {
+      // some/most config files on root export defaults from them
+      // and also import from node
+      "includes": ["**/*.config.ts"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noNodejsModules": "off"
+          },
+          "style": {
+            "noDefaultExport": "off"
+          }
+        }
+      }
+    }
+  ]
 }
