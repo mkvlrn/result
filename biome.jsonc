@@ -1,4 +1,5 @@
 {
+  "$schema": "node_modules/@biomejs/biome/configuration_schema.json",
   "vcs": {
     "clientKind": "git",
     "enabled": true,
@@ -57,9 +58,9 @@
     },
 
     {
-      // some/most config files on root export defaults from them
-      // and also import from node
-      "includes": ["**/*.config.ts"],
+      // test files, config files, and some scripts
+      // export defaults from them, and also import from node
+      "includes": ["**/*.config.ts", "**/*.test.ts", "**/*.spec.ts", "**/scripts/**"],
       "linter": {
         "rules": {
           "correctness": {
