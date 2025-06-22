@@ -29,7 +29,11 @@
   },
   "linter": {
     "domains": {
-      "test": "all"
+      "project": "all",
+      "test": "all",
+      "react": "none",
+      "next": "none",
+      "solid": "none"
     },
     "enabled": true,
     "rules": {
@@ -46,28 +50,14 @@
   "overrides": [
     {
       // TODO: check later
-      // not working properly, flags stuff from node_modules as unresolved
+      // noUnresolvedImports not working properly, flags node builtins
+      // useExplicitType breaking type inference
       "includes": ["**/*"],
       "linter": {
         "rules": {
           "nursery": {
-            "noUnresolvedImports": "off"
-          }
-        }
-      }
-    },
-
-    {
-      // test files, config files, and some scripts
-      // export defaults from them, and also import from node
-      "includes": ["**/*.config.ts", "**/*.test.ts", "**/*.spec.ts", "**/scripts/**"],
-      "linter": {
-        "rules": {
-          "correctness": {
-            "noNodejsModules": "off"
-          },
-          "style": {
-            "noDefaultExport": "off"
+            "noUnresolvedImports": "off",
+            "useExplicitType": "off"
           }
         }
       }

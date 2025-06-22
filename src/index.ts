@@ -10,7 +10,6 @@ export type Result<T, E = Error> =
   | { readonly ok: true; readonly value: T }
   | { readonly ok: false; readonly error: E };
 
-// biome-ignore lint/nursery/useExplicitType: https://github.com/biomejs/biome/issues/5932
 export const Result: {
   success<T>(value: T): Result<T, never>;
   error<E = Error>(error: E): Result<never, E>;
@@ -20,11 +19,11 @@ export const Result: {
    * @param value The success value
    * @returns A Result object representing success
    */
-  success: <T>(value: T): Result<T, never> => ({ ok: true, value: value }),
+  success: <T>(value: T): Result<T, never> => ({ ok: true, value }),
   /**
    * Creates an error Result with the given error.
    * @param error The error value
    * @returns A Result object representing error
    */
-  error: <E = Error>(error: E): Result<never, E> => ({ ok: false, error: error }),
+  error: <E = Error>(error: E): Result<never, E> => ({ ok: false, error }),
 };
