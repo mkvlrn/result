@@ -3,15 +3,15 @@
  * It can either be a success with a value or an error with an error message.
  * This is a generic type that can be used with any type of value and error.
  *
- * It is also an alias object containing the success and error functions to
+ * It is also an alias object containing the ok and error functions to
  * make it easier to create Result objects.
  */
 export type Result<T, E = Error> =
-  | { readonly ok: true; readonly value: T }
-  | { readonly ok: false; readonly error: E };
+  | { readonly error: undefined; readonly value: T }
+  | { readonly error: E };
 
 export const Result: {
-  success<T>(value: T): Result<T, never>;
+  ok<T>(value: T): Result<T, never>;
   error<E = Error>(error: E): Result<never, E>;
 } = {
   /**
@@ -19,11 +19,11 @@ export const Result: {
    * @param value The success value
    * @returns A Result object representing success
    */
-  success: <T>(value: T): Result<T, never> => ({ ok: true, value }),
+  ok: <T>(value: T): Result<T, never> => ({ error: undefined, value }),
   /**
    * Creates an error Result with the given error.
    * @param error The error value
    * @returns A Result object representing error
    */
-  error: <E = Error>(error: E): Result<never, E> => ({ ok: false, error }),
+  error: <E = Error>(error: E): Result<never, E> => ({ error }),
 };
