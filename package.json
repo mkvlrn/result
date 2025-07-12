@@ -1,7 +1,7 @@
 {
   "name": "@mkvlrn/result",
   "description": "Result type for TypeScript",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "license": "MIT",
   "type": "module",
   "publishConfig": {
@@ -16,10 +16,13 @@
     "build"
   ],
   "scripts": {
+    "test": "vitest",
     "build": "rm -rf build && tsc"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.0.6",
-    "typescript": "^5.8.3"
+    "@biomejs/biome": "^2.1.1",
+    "@types/node": "^24.0.13",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
   }
 }

@@ -1,18 +1,18 @@
 /**
  * Result type to represent the outcome of an operation.
- * It can either be a success with a value or an error with an error message.
- * This is a generic type that can be used with any type of value and error.
+ * It can either be a success with a value or an error.
+ * This is a generic type that can be used with any type of value and error (should extend Error).
  *
  * It is also an alias object containing the ok and error functions to
  * make it easier to create Result objects.
  */
-export type Result<T, E = Error> =
+export type Result<T, E extends Error> =
   | { readonly error: undefined; readonly value: T }
   | { readonly error: E };
 
 export const Result: {
   ok<T>(value: T): Result<T, never>;
-  error<E = Error>(error: E): Result<never, E>;
+  error<E extends Error>(error: E): Result<never, E>;
 } = {
   /**
    * Creates a successful Result with the given value.
@@ -25,5 +25,5 @@ export const Result: {
    * @param error The error value
    * @returns A Result object representing error
    */
-  error: <E = Error>(error: E): Result<never, E> => ({ error }),
+  error: <E extends Error>(error: E): Result<never, E> => ({ error }),
 };

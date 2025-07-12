@@ -25,9 +25,11 @@ jobs:
         with:
           node-version: 24
       - name: install
-        run: yarn install
+        run: npm ci
+      - name: test
+        run: npx vitest run
       - name: build
-        run: yarn build
+        run: npm run build
       - name: package
         run: npx semantic-release
         env:

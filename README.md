@@ -5,7 +5,7 @@ Type-safe Result pattern for TypeScript representing success or failure.
 ## Installation
 
 ```bash
-npm install @mkvlrn/result
+npm add @mkvlrn/result
 ```
 
 ## Usage
@@ -20,6 +20,7 @@ const success = Result.ok(42);
 const failure = Result.error(new Error("Something went wrong"));
 
 // Check result
+const result = Result.ok(42);
 if (result.error) {
   console.log("Error:", result.error.message);
 } else {
@@ -32,7 +33,7 @@ if (result.error) {
 ### Basic Function
 
 ```typescript
-function divide(a: number, b: number): Result<number> {
+function divide(a: number, b: number): Result<number, Error> {
   if (b === 0) {
     return Result.error(new Error("Division by zero"));
   }
@@ -48,7 +49,7 @@ if (!result.error) {
 ### Async Operations
 
 ```typescript
-async function fetchUser(id: number): Promise<Result<User>> {
+async function fetchUser(id: number): Promise<Result<User, Error>> {
   try {
     const response = await fetch(`/api/users/${id}`);
     if (!response.ok) {
@@ -65,21 +66,26 @@ async function fetchUser(id: number): Promise<Result<User>> {
 ### Custom Error Types
 
 ```typescript
-type ValidationError = {
-  field: string;
-  message: string;
-};
+class ValidationError extends Error {
+  readonly customField: number;
+
+  constructor(customField: number, message: string) {
+    super(message);
+    this.name = "CustomField";
+    this.customField = customField;
+  }
+}
 
 function validateEmail(email: string): Result<string, ValidationError> {
   if (!email.includes("@")) {
-    return Result.error({ field: "email", message: "Invalid email format" });
+    return Result.error(new ValidationError(400, "custom"));
   }
   return Result.ok(email);
 }
 
 const result = validateEmail("invalid-email");
 if (result.error) {
-  console.log(`${result.error.field}: ${result.error.message}`);
+  console.log(`${result.error.customField}: ${result.error.message}`);
 }
 ```
 
